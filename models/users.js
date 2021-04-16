@@ -3,17 +3,12 @@ var Schema = mongoose.Schema;
 
 
 var User = new Schema({
-    firstname: {
+    login: {
       type: String,
-        default: 'No'
+      required: true
     },
-    lastname: {
-      type: String,
-        default: 'Name'
-    },
-    admin:   {
-        type: Boolean,
-        default: false
+    pin: {
+      type: Number
     }
 },{
   timestamp:true

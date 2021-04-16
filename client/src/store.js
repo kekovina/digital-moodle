@@ -6,7 +6,9 @@ import { Upload, message } from 'antd';
 
 
 
-var store = {}
+var store = {
+    a:5
+}
 
 
 
