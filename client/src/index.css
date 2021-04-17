@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 .container{
-  background: url('./img/bg.png');
+  background: url('./img/bg.png') #100E74;
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,5 +11,13 @@ body {
 .header{
   background: #F8A62B !important
 }
-
+.ant-progress-inner{
+  height: 16px  !important
+}
+.ant-progress-bg{
+  height: 16px !important
+}
+.ant-progress-default{
+  padding-bottom: 10px !important
+}
 

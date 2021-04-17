@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { observer, inject } from 'mobx-react'
 import Auth from './components/Auth'
 import Main from './components/Main'
 import Inventory from './components/Inventory'
 import { Menu, Layout } from 'antd'
 import './index.css'
+import Map from './components/Map'
+import Manage from './components/Manage'
 const { Sider, Header } = Layout
 
 const pages = [
@@ -13,9 +15,14 @@ const pages = [
     {route: 'inventory', name: 'Инвентарь', component: <Inventory/>},
     {route: 'exchange', name: 'Точка обмена'},
     {route: 'shop', name: 'Магазин'},
+    {route: 'map', name: 'Путь обучения', component: <Map/>},
+    {route: 'manage', name: 'Управление', component: <Manage/>}
 ]
 
  const App = inject("store")(observer(({ store, props })=> {
+    useEffect(() => {
+        store.getUser()
+    }, [])
     return (
     <Layout style={{height: '100vh'}}>
         <Sider style={{background: '#F8A62B'}}>

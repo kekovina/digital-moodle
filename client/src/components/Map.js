@@ -13,26 +13,8 @@ const styles = {
 
 const Map = ({ stage }) => {
     return (
-        <div style={styles.container}>
-            <Image src={way} preview={false} />
-            <div style={{position: 'absolute', bottom: '230px', left: '440px'}}>
-                <div style={{position: 'relative'}}>
-                    <div className="plannet"></div>
-                    <div className="shadow"></div>
-                </div>
-            </div>
-            <div style={{position: 'absolute', top: '250px', left: '70px'}}>
-                <div style={{position: 'relative'}}>
-                    <div className="plannet"></div>
-                    <div className="shadow"></div>
-                </div>
-            </div>
-            <div style={{position: 'absolute', top: '100px', left: '470px'}}>
-                <div style={{position: 'relative'}}>
-                    <div className="plannet"></div>
-                    <div className="shadow"></div>
-                </div>
-            </div>
+        <div className="container">
+            
         </div>
     );
 }
