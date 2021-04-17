@@ -3,17 +3,13 @@ import cookie from 'react-cookies';
 import axios from 'axios'
 import { Upload, message } from 'antd';
 
+class Store{
+    @observable activePage = 'main'
 
+    @action.bound
+    setActivePage(page){
+        this.activePage = page
+    } 
+}
 
-
-var store = {}
-
-
-
-
-
-
-
-
-
-export default store;
+export default new Store();

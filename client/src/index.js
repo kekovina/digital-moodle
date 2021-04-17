@@ -6,13 +6,13 @@ import store from './store.js';
 import 'antd/dist/antd.css';
 import App from './App'
 import { BrowserRouter, Route } from 'react-router-dom';
-import axios from 'axios';
+import { Provider } from 'mobx-react'
 
 
 
 ReactDOM.render(
-    <BrowserRouter>
+    <Provider store={store}>
         <App/>
-    </BrowserRouter>
+    </Provider>
     , document.getElementById('root'));
 serviceWorker.unregister();

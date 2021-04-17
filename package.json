@@ -6,6 +6,7 @@
     "server": "nodemon ./bin/www",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "devc": "npm run client",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
@@ -25,6 +26,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
+    "rc-field-form": "^1.20.0",
     "session-file-store": "^1.2.0",
     "socket.io": "^2.3.0"
   },
