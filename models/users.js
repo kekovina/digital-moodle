@@ -5,11 +5,33 @@ var Schema = mongoose.Schema;
 var User = new Schema({
     login: {
       type: String,
-      required: true
+    },
+    chat_id: {
+      type: String
     },
     pin: {
       type: Number
+    },
+    artefacts: [  ],
+    balance: {
+      type: Number
+    },
+    food_bar: {
+      type: Number,
+      default: 100
+    },
+    oxygen_bar: {
+      type: Number,
+      default: 100
+    },
+    active: [  ],
+    food: [],
+    oxygen: [],
+    balance: {
+      type: Number,
+      default: 0
     }
+    
 },{
   timestamp:true
 });

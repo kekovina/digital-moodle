@@ -4,12 +4,15 @@ var path = require('path');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 var config = require('./config');
+var bot = require('./bot/bot');
 
 
 
 //all routers
 var usersRouter = require('./routes/users');
-//all models
+var artefactRouter = require('./routes/artefact');
+var foodRouter = require('./routes/food');
+var exchangeRouter = require('./routes/exchange');
 
 
 //mongodb connect
@@ -21,6 +24,8 @@ connect.then((db) => {
 }, (err) => { console.log(err); });
 
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +45,9 @@ if(process.env.NODE_ENV === 'production'){
 
 //all routers for using
 app.use('/users', usersRouter);
+app.use('/artefact', artefactRouter);
+app.use('/food',foodRouter);
+app.use('/exchange',exchangeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

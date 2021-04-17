@@ -3,11 +3,9 @@ var router = express.Router();
 
 const bodyParser = require('body-parser');
 var User = require('../models/users');
+var Quiz = require('../models/quiz');
 
-const Bot = require('node-telegram-bot-api');
-const token = '1713251055:AAHR8KRvOuyx4Z3vQq_5ELvdy8kDcPEzkkg';
 
-const bot = new Bot(token, {polling: true});
 
 
 router.use(bodyParser.json());
@@ -46,33 +44,51 @@ router.post('/login', (req, res) => {
   })
 });
 
+router.get('/:login', (req,res)=>{
+  let login  = req.params.login;
 
-
-bot.onText(/\/start/, function (msg, match) {
-  let chatId= msg.chat.id;
-  let username = msg.from.username;
-
-  
-  User.find({login: username}).then((res)=>{
-    if(res[0] != undefined){
-      if(res[0].pin == 0){
-        bot.sendMessage(chatId, '⚠️Вы уже авторизованы');
-      }
-      
-    }
-
-    if(res[0] != undefined) {
-      if(res[0].pin != 0) {
-        bot.sendMessage(chatId, `Ваш пин-код: ${res[0].pin}`);
-      }
-    }
-
-    if(res[0] == undefined) {
-      bot.sendMessage(chatId,'❌Вы не зарегистрированы')
+  User.find({login: login}).then(user=>{
+    if(user[0] != undefined) {
+      res.statusCode = 200;
+      res.json(user[0]);
+    } else {
+      res.statusCode = 400;
+      res.json({err: 'user doesnt exist'});
     }
   })
+})
 
-});
+router.post('/money',(req,res)=>{
+  User.find({login: req.body.login}).then(user=>{
+    console.log(req.body.login)
+    if(user[0] != undefined) {
+      user[0].balance += req.body.amount;
+      user[0].save(()=>{
+        res.statusCode = 200;
+        res.json({balance: user[0].balance});
+      })
+    } else {
+      res.statusCode = 400;
+      res.json({err: 'user doesnt exist'});
+    }
+  })
+})
+
+router.post('/quiz/create', (req,res)=>{
+  let question = req.body.question;
+  let answers = req.body.answers.split(',');
+  let rightAnswer = req.body.right_answer;
+
+  Quiz.create({question: question, answers: answers, right_answer: rightAnswer}).then(quiz=>{
+    res.statusCode = 200;
+    res.json(quiz)
+  })
+})
+
+
+
+
+
 
 
 module.exports = router;
