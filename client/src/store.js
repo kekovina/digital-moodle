@@ -5,7 +5,7 @@ import { Upload, message } from 'antd';
 import { serverUrl } from './config'
 
 class Store{
-    @observable activePage = 'map'
+    @observable activePage = 'auth'
 
     @action.bound
     setActivePage(page){
@@ -39,7 +39,9 @@ class Store{
             this.setLogin(tg.substr(1))
         } else if(res.data.auth){
             axios.get(`${serverUrl}/users/${tg.substr(1)}`).then((res) => {
+                this.setLogin(tg.substr(1))
                 this.userInfo = res.data
+                this.setActivePage('main')
             })   
         }   
         })
