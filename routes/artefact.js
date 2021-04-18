@@ -18,7 +18,7 @@ router.put('/create', (req, res) => {
 })
 
 router.post('/add', (req,res)=>{
-    User.find({login: req.body.login.substr(1) }).then(user=>{
+    User.find({login: req.body.login }).then(user=>{
       if(user[0] != undefined){
         let random = func.random(1,4);
         console.log(random)
