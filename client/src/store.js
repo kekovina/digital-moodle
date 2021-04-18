@@ -2,6 +2,25 @@ import { observable, action, decorate, autorun } from 'mobx';
 import cookie from 'react-cookies';
 import axios from 'axios'
 import { Upload, message } from 'antd';
+<<<<<<< HEAD
+
+
+
+
+var store = {
+    a:5
+}
+
+
+
+
+
+
+
+
+
+export default store;
+=======
 import { serverUrl } from './config'
 
 class Store{
@@ -64,3 +83,4 @@ class Store{
 }
 
 export default new Store();
+>>>>>>> master

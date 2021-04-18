@@ -3,18 +3,35 @@ var Schema = mongoose.Schema;
 
 
 var User = new Schema({
-    firstname: {
+    login: {
       type: String,
-        default: 'No'
     },
-    lastname: {
-      type: String,
-        default: 'Name'
+    chat_id: {
+      type: String
     },
-    admin:   {
-        type: Boolean,
-        default: false
+    pin: {
+      type: Number
+    },
+    artefacts: [  ],
+    balance: {
+      type: Number
+    },
+    food_bar: {
+      type: Number,
+      default: 100
+    },
+    oxygen_bar: {
+      type: Number,
+      default: 100
+    },
+    active: [  ],
+    food: [],
+    oxygen: [],
+    balance: {
+      type: Number,
+      default: 0
     }
+    
 },{
   timestamp:true
 });

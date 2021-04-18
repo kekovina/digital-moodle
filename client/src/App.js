@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+import React from 'react'
+import {Switch,Route,Redirect} from 'react-router-dom'
+import AuthForm from './Components/AuthForm/index'
+import Account from './Components/Account/index'
+import { observer } from 'mobx-react'
+import store from './store'
+
+ const App = observer((props)=> {
+    return(
+        <div></div>
+    )
+}
+ )
+=======
 import React, { useEffect } from 'react'
 import { observer, inject } from 'mobx-react'
 import Auth from './components/Auth'
@@ -42,6 +57,7 @@ const pages = [
     </Layout>)
         
 }))
+>>>>>>> master
 
 
 export default App;
