@@ -8,7 +8,6 @@ var func = require('../functions');
 var bot = require('../bot/bot');
 var Quiz = require('../models/quiz');
 const exchange = require('../models/exchange');
-const user = require('../../../fishingBot/models/user');
 
 
 router.post('/create', (req,resp)=>{
