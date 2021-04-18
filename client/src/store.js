@@ -45,7 +45,18 @@ class Store{
         })
         
     }
-
+    @observable users = []
+    @action.bound getUsers(){
+        axios.get(`${serverUrl}/users`).then(res => {
+            if(res.data){
+                this.users = res.data.users
+            }
+        })
+    }
+    @observable enemyInventory = []
+    @action.bound setEnemyInventory(inv){
+        this.enemyInventory = inv
+    }
     
     
 }

@@ -7,13 +7,14 @@ import { Menu, Layout } from 'antd'
 import './index.css'
 import Map from './components/Map'
 import Manage from './components/Manage'
+import Exchange from './components/Exchange'
 const { Sider, Header } = Layout
 
 const pages = [
     {route: 'auth', name: 'Вход', component: <Auth/>},
     {route: 'main', name: 'Главная', component: <Main/>},
     {route: 'inventory', name: 'Инвентарь', component: <Inventory/>},
-    {route: 'exchange', name: 'Точка обмена'},
+    {route: 'exchange', name: 'Точка обмена', component: <Exchange />},
     {route: 'shop', name: 'Магазин'},
     {route: 'map', name: 'Путь обучения', component: <Map/>},
     {route: 'manage', name: 'Управление', component: <Manage/>}
