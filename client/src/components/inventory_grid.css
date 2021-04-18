@@ -1,0 +1,27 @@
+.container-inv{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 10px;
+}
+.container-inv .inv_item{
+    border: 1px solid #F8A62B;
+    flex: 0 0 calc( 20% - 10px );
+    height: 80px;
+    width: 80px;    
+    transition: .2s ease-out;
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+    margin: 5px;
+}
+.inv_item.notallowed:hover{
+    background: inherit;
+    transition: .2s ease-in;
+    cursor: not-allowed;
+}
+.inv_item.allowed:hover{
+    background: #3656ac77;
+    transition: .2s ease-in;
+    cursor: pointer;
+}

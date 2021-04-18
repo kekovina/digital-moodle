@@ -1,0 +1,22 @@
+.artif{
+    background: #20409A80;
+    border: 2px solid #F8A62B;
+    padding: 19px;
+    min-height: 80px;
+    min-width: 80px;
+    border-radius: 4px;
+    transition: .2s ease-out;
+    cursor: pointer
+}
+.artif:hover{
+    background: #3656ac77;
+    transition: .2s ease-in;
+}
+.artif.empty{
+    background: #40485e77;
+    cursor: not-allowed 
+}
+.artif.empty:hover{
+    background: #40485e77;
+    cursor:not-allowed
+}

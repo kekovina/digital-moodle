@@ -1,0 +1,27 @@
+@keyframes levitation{
+    70%{
+        transform: translateY(-5px);
+    }
+}
+@keyframes shadow_planet {
+    70%{
+        background: radial-gradient(circle at 51% 51%, #0006, #0000001a 40%, #0000 50%);
+    }
+}
+.plannet{
+    background: tomato;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    animation: levitation 2s ease-in-out infinite
+}
+.plannet ~ .shadow{
+    position: absolute;
+    background: radial-gradient(circle at 50% 50%, #0006, #0000001a 40%, #0000 50%);
+    height: 100%;
+    width: 100%;
+    transform: perspective(400px) rotateX(80deg);
+    top: 80px;
+    animation: shadow_planet 2s ease-in-out infinite
+}
