@@ -58,6 +58,32 @@ router.get('/:login', (req,res)=>{
   })
 })
 
+router.get('/artefacts/:login', (req,res)=>{
+  let login  = req.params.login;
+
+  User.find({login: login}).then(user=>{
+    if(user[0] != undefined) {
+      res.statusCode = 200;
+      res.json({artefacts: user[0].artefacts, login: user[0].login});
+    } else {
+      res.statusCode = 400;
+      res.json({err: 'user doesnt exist'});
+    }
+  })
+})
+
+router.get('/', (req,res)=>{
+  
+  User.find().then(user=>{
+    var users = user.map(el=>{
+      return el.login
+    })
+
+    res.statusCode = 200;
+    res.json({users: users});
+  })
+})
+
 router.post('/money',(req,res)=>{
   User.find({login: req.body.login}).then(user=>{
     console.log(req.body.login)

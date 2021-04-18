@@ -41,7 +41,15 @@ router.post('/create', (req,resp)=>{
 
             user_to.artefacts.forEach((el,index)=>{
                 if(el._id == artefact_to){
-                    bot.sendMessage(user_to.chat_id, `Сокурсник @${from} хочет обменять ${from_artefact} на ${el.name}. Ответьте на предложение.` )
+                    let keyboard = {
+                        reply_markup: JSON.stringify({
+                          inline_keyboard: [
+                            [{ text: 'Подтвердить', callback_data: `confirm:${exchange._id}`}],
+                            
+                          ]
+                        })
+                      };
+                    bot.sendMessage(user_to.chat_id, `Сокурсник @${from} хочет обменять ${from_artefact} на ${el.name}. Ответьте на предложение.` ,keyboard)
                 }
             })
 
@@ -132,7 +140,7 @@ router.post('/submit', (req,res)=>{
         var right_answer = msg.data.split(':')[0];
         var exchange_id = msg.data.split(':')[1];
         var answer = msg.data.split(':')[2];
-
+        if(right_answer != 'confirm'){
         if(answer == right_answer){
             bot.sendMessage(chatId,'🥳Вы ответили верно!');
             Exchange.find({_id: exchange_id}).then(ex=>{
@@ -223,6 +231,60 @@ router.post('/submit', (req,res)=>{
             })
 
         }
+    }
+
+    if(right_answer == "confirm"){
+        let exchange_id = msg.data.split(':')[1];
+        
+        let accepter = username;
+
+        Exchange.find({_id: exchange_id}).then(exchange=>{
+            if(exchange[0].status != 'ended'){
+            if(accepter == exchange[0].to){
+                exchange[0].status = "answering";
+                    exchange[0].save().then(()=>{
+                        let random = func.random(0,1);
+                        
+                        Quiz.find().then(resp=>{
+                            let quiz = resp[random];
+    
+                            let question = quiz.question;
+                            let answers = quiz.answers;
+                            let right_answer = quiz.right_answer;
+    
+                            let keyboard = {
+                                reply_markup: JSON.stringify({
+                                  inline_keyboard: [
+                                    [{ text: answers[0], callback_data: `${right_answer}:${exchange[0]._id}:0`} ,{ text: answers[1], callback_data:  `${right_answer}:${exchange[0]._id}:1`} ],
+                                    [{ text: answers[2], callback_data:  `${right_answer}:${exchange[0]._id}:2` }, { text: answers[3], callback_data:  `${right_answer}:${exchange[0]._id}:3` }]
+                                  ]
+                                })
+                              };
+    
+                              
+    
+                              User.find({login: accepter}).then(u=>{
+                                  let user = u[0];
+    
+                                  bot.sendMessage(user.chat_id,question,keyboard);
+    
+                                  User.find({login: exchange[0].from}).then(us=>{
+                                      user = us[0];
+    
+                                      bot.sendMessage(user.chat_id,question,keyboard);
+                                  })
+    
+                                
+    
+                              })
+                        })
+                    })
+            }
+        } else {
+            
+        }
+        })
+    }
 
 
 
