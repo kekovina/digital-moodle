@@ -25,7 +25,7 @@ class Store{
     }
     @action.bound
     sendPin(pin){
-        axios.post(`${serverUrl}/users/login`, {login:this.login,pin: pin}).then((res) => {
+        axios.post(`${serverUrl}/users/login`, {login: "@"+this.login,pin: pin}).then((res) => {
         if(res.data){
             this.setActivePage("main")
             this.getUser()
@@ -34,7 +34,7 @@ class Store{
     }
     @action.bound
     sendTg(tg){
-        axios.post(`${serverUrl}/users/login`, {login: '@'+tg}).then((res) => {
+        axios.post(`${serverUrl}/users/login`, {login:  tg}).then((res) => {
         if(res.data.auth == 'pending'){
             this.setLogin(tg.substr(1))
         } else if(res.data.auth){
