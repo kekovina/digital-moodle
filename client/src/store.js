@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Upload, message } from 'antd';
 
 class Store{
-    @observable activePage = 'auth'
+    @observable activePage = 'map'
 
     @action.bound
     setActivePage(page){
@@ -35,9 +35,14 @@ class Store{
     sendTg(tg){
         axios.post('http://80.78.207.245:3001/users/login', {login: tg}).then((res) => {
         if(res.data.auth == 'pending'){
-            this.setLogin(tg)
-        }    
+            this.setLogin(tg.substr(1))
+        } else if(res.data.auth){
+            axios.get(`http://80.78.207.245:3001/users/${tg.substr(1)}`).then((res) => {
+                this.userInfo = res.data
+            })   
+        }   
         })
+        
     }
 
     
